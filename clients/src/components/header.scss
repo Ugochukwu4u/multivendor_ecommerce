@@ -1,0 +1,103 @@
+$breakpointSm: 600px;
+.header{
+    display:flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background:#E5E4E2;
+    @media(max-width: $breakpointSm){
+        flex-direction: column-reverse;
+        padding:0;
+    }
+    .left{
+        flex:1;
+        background:#fff;
+        margin: 1rem 0;
+        padding:1.5rem;
+        border-radius: 0.3rem;
+        .cat-items{
+            display:flex;
+            align-items: center;
+            gap:1rem;
+            margin-bottom:1rem;
+            cursor:pointer;
+            &:hover{
+                color:#8A9A5B;
+            }
+            img{
+                width:20px;
+                height:20px;
+                object-fit: cover;
+            }
+            span{
+                text-transform: capitalize;
+            }
+            
+        }
+        @media(max-width: $breakpointSm){
+            display:none;
+        }
+    }
+    .center{
+        flex:3;
+        margin:1rem 1rem 0 1rem;
+        border-radius: 0.3rem;
+        @media(max-width: $breakpointSm){
+            margin:0;
+        }
+    }
+    .right{
+        flex:1;
+        margin:1rem 0;
+        @media(max-width: $breakpointSm){
+            margin:0.3rem 0;
+        }
+        .advert-1-mobile{
+            display:none;
+            @media(max-width: $breakpointSm){
+                display:block;
+                background:#8A9A5B;
+                color:white;
+                text-align: center;
+                padding:0.3rem 0;
+                text-transform: uppercase;
+            }
+        }
+        .advert-1{
+            background:#fff;
+            padding:1.5rem;
+            border-radius: 0.3rem;
+            .advert-container{
+                display:flex;
+                align-items: center;
+                gap:1rem;
+                margin-bottom: 1rem;
+                i{
+                    border:1px solid black;
+                    padding:0.5rem;
+                    font-size: 18px;
+                    border-radius: 50%;
+                }
+                p{
+                    text-transform: capitalize;
+                }
+            }
+            @media(max-width: $breakpointSm){
+                display:none;
+            }
+        }
+       .advert-2{
+        width:100%;
+        margin-top:2rem;
+        .advert-icon{
+            img{
+                width:100%;
+                object-fit: cover;
+                border-radius: 0.3rem;
+            }
+        }
+        @media(max-width: $breakpointSm){
+            display:none;
+        }
+       }
+    }
+}

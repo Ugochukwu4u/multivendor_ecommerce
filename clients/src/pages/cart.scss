@@ -1,0 +1,212 @@
+$breakpointSm: 768px;
+.empty-cart{
+    background:#E5E4E2;
+    padding: 1rem 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0.5rem;
+        position:relative;
+    }
+    .empty-cart-container{
+        background:#fff;
+        padding:1.5rem;
+        margin-bottom:1rem;
+        border-radius: 0.3rem;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        i{
+            background:#E5E4E2;
+            padding:0.3rem;
+            font-size:2rem;
+            border-radius: 50%;
+            margin-bottom: 0.9rem;
+            color:#8A9A5B;
+        }
+        .empty-title{
+            font-weight: 600;
+            margin-bottom:1rem;
+        }
+        .empty-desc{
+            color:#E5E4E2;
+            margin-bottom: 1.5rem;
+            @media(max-width: $breakpointSm){
+                text-align: center;
+            }
+        }
+        button{
+            padding:1rem;
+            background:#8A9A5B;
+            color:#fff;
+            text-transform: uppercase;
+            border:none;
+            outline:none;
+            border-radius: 0.2rem;
+            cursor:pointer;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        }
+    }
+}
+
+.main-cart{
+    background:#E5E4E2;
+    padding:1rem 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0.5rem;
+    }
+    .cart-wrapper{
+        display:flex;
+        gap:1rem;
+        margin-bottom: 1.2rem;
+        @media(max-width: $breakpointSm){
+           flex-direction: column;
+        }
+        .cart-left{
+            width:80%;
+            background:#fff;
+            padding:1.5rem;
+            border-radius: 0.3rem;
+            @media(max-width: $breakpointSm){
+                width:100%;
+            }
+            h1{
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                padding-bottom:0.5rem;
+                border-bottom: 1px solid #E5E4E2;
+            }
+            ul{
+                li{
+                    list-style: none;
+                    display:flex;
+                    gap:1rem;
+                    .cart-left-img{
+                        width:10%;
+                        img{
+                            width:100%;
+                            object-fit: contain;
+                            border-radius: 0.2rem;
+                        }
+                    }
+                    .cart-left-items{
+                        width:90%;
+                        .cart-left-title{
+                            display:flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            .cart-left-p{
+                                font-weight: 600;
+                                span{
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
+                        .cart-left-desc{
+                            display:flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin:0.3rem 0;
+
+                            .cart-left-ini{
+                                display:flex;
+                                gap:0.1rem;
+                                p{
+                                    color:#E5E4E2;
+                                    text-decoration: line-through;
+                                }
+                                span{
+                                    background:#E5E4E2;
+                                    color:crimson;
+                                    border-radius: 0.1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .cart-right{
+            width:20%;
+            @media(max-width: $breakpointSm){
+                width:100%;
+                position:fixed;
+                bottom:0;
+                left:0;
+                background:white !important;
+                z-index: 1;
+                padding-right:1rem;
+            }
+            height:fit-content;
+            background:#fff;
+            border-radius: 0.3rem;
+            h1{
+                font-size: 1.2rem;
+                text-transform: uppercase;
+                font-weight: 600;
+                padding:1rem;
+                border-bottom:1px solid #E5E4E2
+            }
+            .cart-right-wrapper{
+                padding:1rem;
+                border-bottom:1px solid #E5E4E2;
+                display:flex;
+                justify-content: space-between;
+                p{
+                    font-weight: 600;
+                    span{
+                        text-decoration: line-through;
+                    }
+                }
+            }
+            button{
+                margin:1rem;
+                width:80%;
+                padding:0.7rem;
+                background:#8A9A5B;
+                color:white;
+                font-weight: 600;
+                outline:none;
+                border:none;
+                border-radius: 0.2rem;
+                cursor:pointer;
+                text-transform: uppercase;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+                @media(max-width: $breakpointSm){
+                    width:90%;
+                    padding:1.1rem 0 1.5rem 0;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+    }
+    .related-items{
+        background:#fff;
+        padding:0.3rem;
+        padding:1.5rem;
+        border-radius: 0.3rem;
+        margin-top:1rem;
+        @media(max-width: $breakpointSm){
+            padding:0.5rem;
+        }
+        h1{
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .related-item-wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            gap:1rem;
+            justify-content: center;
+            .content-edit{
+                width:18.5%;
+                @media(max-width: $breakpointSm){
+                    width:45%;
+                }
+            }
+        }
+    }
+}

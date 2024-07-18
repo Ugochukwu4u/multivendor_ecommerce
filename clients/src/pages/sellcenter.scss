@@ -1,0 +1,101 @@
+$breakpointSm: 700px;
+.img-edit{
+    width:100%;
+    margin:0.1rem 0;
+    border-radius: 0.1rem;
+}
+.sell-center{
+    background:#E5E4E2;
+    padding: 1rem;
+    display:flex;
+    gap:0.5rem;
+    @media(max-width: $breakpointSm){
+        flex-direction: column;
+     }
+    .sell-center-left{
+        width:20%;
+        @media(max-width: $breakpointSm){
+           width:100%;
+         }
+    }
+    .sell-center-right{
+        width:80%;
+        padding:0 2rem;
+        @media(max-width: $breakpointSm){
+            width:100%;
+            padding:0;
+         }
+        .sell-center-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @media(max-width: $breakpointSm){
+                flex-direction: column;
+             }
+            h1{
+                font-size: 2.5rem;
+                color:#8A9A5B;
+            }
+            .sell-date{
+                display: flex;
+                gap:0.5rem;
+                align-items: center;
+
+                i{
+                    color:inherit;
+                }
+            }
+        }
+        .summary-right{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            margin:1rem 0;
+            @media(max-width: $breakpointSm){
+                flex-direction: column;
+             }
+            .all-products{
+                display:flex;
+                justify-content: center;
+                gap:0.5rem;
+                align-items: center;
+                background:#fff;
+                padding:1.5rem;
+                border-radius: 0.7rem;
+                width:25%;
+                box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+                @media(max-width: $breakpointSm){
+                    width:100%;
+                    margin:0.3rem 0;
+                    padding:0.5rem;
+                 }
+                i{
+                    font-size: 2rem;
+                    color:green;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                    background:inherit
+                }
+                .all-product-title{
+                    text-align: center;
+                    p{
+                        color:#E5E4E2;
+                    }
+                }
+            }
+        }
+        .recent-order-grid{
+            background:#fff;
+            border-radius: 0.5rem;
+            .order-grid-heading{
+                padding:1rem;
+                p{
+                    color:#E5E4E2;
+                }
+            }
+          
+        }
+    }
+} 
+.avater-img{
+    border-radius: 50%;
+}

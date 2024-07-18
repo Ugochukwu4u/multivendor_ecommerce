@@ -1,0 +1,149 @@
+$breakpointSm: 768px;
+.footer{
+    width:100%;
+
+    .footer-one{
+        background:  #36454F;
+        color: #fff;
+        padding: 1.5rem 3rem;
+        display:flex;
+        justify-content: space-between;
+        @media(max-width: $breakpointSm){
+            display:none;
+        }
+        .left{
+            width:25%;
+            display:flex;
+            align-items: center;
+            gap:0.5rem;
+        }
+        .center{
+            width:50%;
+            h2{
+                margin-bottom: 0.7rem;
+            }
+            form{
+                margin-top: 2rem;
+                .input-container{
+                    display:flex;
+                    align-items: center;
+                    gap: 1rem;
+                    .input-email{
+                        background:#fff;
+                        color:hsl(0, 0%, 0%);
+                        padding:0.2rem;
+                        width:50%;
+                        display:flex;
+                        align-items: center;
+                        border-radius: 0.2rem;
+                        i{
+                            width:10%;
+                            font-size: 1.2rem;
+                        }
+                        input{
+                            padding:0.6rem;
+                            width:90%;
+                            outline:none;
+                            border:none;
+                            outline:none;
+                        }
+                    }
+                    button{
+                        padding:0.5rem;
+                        background:inherit;
+                        border:0.1rem solid #fff;
+                        color:white;
+                        border-radius: 0.2rem;
+                        outline:none;
+                        cursor:pointer;
+                        &:hover{
+                            background:white;
+                            color:#000;
+                        }
+                    }
+                }
+                .checkbox{
+                    display:flex;
+                    align-items: center;
+                    gap:0.5rem;
+                    margin-top: 1rem;
+                   p{
+                    width:80%;
+                   }
+                }
+                input[type='submit']{
+                    margin-top: 1rem;
+                    background:inherit;
+                    color:crimson;
+                    text-decoration: underline;
+                    outline:none;
+                    border:none;
+                    cursor: pointer;
+                }
+            }
+        }
+        .right{
+            .right-container{
+                display:flex;
+                align-items: center;
+                gap:0.5rem;
+
+                .right-title{
+                    h1{
+                        font-size: 1.3rem;
+                        margin-bottom: 0.3rem;
+                    }
+                }
+            }
+            h2{
+                background:white;
+                padding:0.5rem;
+                width:100%;
+                text-align: center;
+                color:#000;
+                border-radius: 0.4rem;
+                margin-top: 1rem;
+            }
+        }
+    }
+    .footer-two{
+        background: #A9A9A9;
+        color: #fff;
+        padding: 1.5rem 3rem;
+        height:100vh;
+        @media(max-width: $breakpointSm){
+            background:  #36454F;
+            height:100%;
+            padding:  1rem;
+        }
+        .footer-two-wrapper{
+            display:flex;
+        justify-content: space-between;
+        @media(max-width: $breakpointSm){
+            flex-direction: column;
+        }
+        .one{
+            h3{
+                margin-bottom:1rem;
+                @media(max-width: $breakpointSm){
+                    font-size: 1.1rem;
+                }
+            }
+            ul >li{
+                list-style: none;
+                margin-bottom: 0.7rem;
+                @media(max-width: $breakpointSm){
+                    font-size: 0.8rem;
+                }
+            }
+        }
+        }
+        .payment{
+            text-align: center;
+            h3{
+                margin-bottom: 1rem;
+            }
+        }
+       
+    }
+}

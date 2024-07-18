@@ -1,0 +1,24 @@
+$breakpointSm: 786px;
+.advert-3{
+    background:#E5E4E2;
+    padding: 1rem 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0;
+    }
+    .advert-wrapper{
+        background:white;
+        padding:0.5rem;
+        border-radius: 0.5rem;
+        @media(max-width: $breakpointSm){
+            padding:0.2rem 0;
+        }
+        img{
+            width:100%;
+            height:15rem;
+            object-fit: cover;
+            @media(max-width: $breakpointSm){
+                height:8rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+.product-carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .products {
+    display: flex;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    background:white;
+  }
+
+  .product {
+    min-width: 160px; // Adjust as needed
+    margin-right: 10px;
+    background: inherit;
+    padding:0;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin: 10px 0;
+      font-size: 1rem;
+      font-weight: lighter;
+    }
+    h2{
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin:0.5rem 0;
+      span{
+        text-decoration: line-through;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.6rem;
+      color: #666;
+    }
+  }
+
+  .indicator-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: 0 5px;
+
+    &.active {
+      background: #333;
+    }
+  }
+}

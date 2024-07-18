@@ -1,0 +1,69 @@
+$breakpointSm: 768px;
+.collection{
+    background:#E5E4E2;
+    padding: 1rem  2rem;
+    @media(max-width: $breakpointSm){
+        padding:0.2rem 0;
+     }
+    h1{
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 300;
+        padding:1rem 0;
+        @media(max-width: $breakpointSm){
+            background:#8A9A5B;
+            color:white;
+            font-size: 1.1rem;
+            padding:0.5rem 1rem;
+        }
+    }
+    .collection-wrapper{
+        background:#fff;
+        padding:1.5rem;
+        border-radius: 0.3rem;
+        display:flex;
+        gap:1rem;
+        flex-wrap: wrap;
+        justify-content:center;
+        @media(max-width: $breakpointSm){
+            padding:0.5rem;
+        }
+        .content-edit{
+            width:18%;
+            @media(max-width: $breakpointSm){
+               width:40%;
+            }
+            cursor:pointer;
+            .content{
+                width:100%;
+                img{
+                    width:100%;
+                    height:8rem;
+                    border-radius: 0.3rem;
+                    @media(max-width: $breakpointSm){
+                        height:6rem;
+                    }
+                }
+                .title{
+                    text-transform: capitalize;
+                    margin:0.5rem 0;
+                    @media(max-width: $breakpointSm){
+                        font-size: 0.9rem;
+                    }
+                }
+                .price{
+                    font-weight: 600;
+                    font-size: 1.2rem;
+                    span{
+                        text-decoration:line-through;
+                    }
+                }
+                .initial-pice{
+                    color:#E5E4E2;
+                    text-decoration:line-through;
+                    margin:0.2rem 0;
+                }
+            }
+        }
+    }
+}

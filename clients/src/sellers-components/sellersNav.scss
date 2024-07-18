@@ -1,0 +1,83 @@
+.sellersNav{
+    background:#fff;
+    padding:1.5rem;
+    border-radius: 0.3rem;
+
+    .logo{
+        display:flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap:0.5rem;
+        
+        i{
+            font-size: 3rem;
+        }
+    }
+    ul{
+        li{
+            list-style: none;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            padding-left:1rem;
+            cursor:pointer;
+
+            &:hover{
+                border-left: 2px solid black;
+            }
+        }
+    }
+    .upload{
+        background-image: linear-gradient(to top,#bdcb92, #fff);
+        padding:1.5rem;
+        border-radius: 0.7rem;
+        // margin-top:9rem;
+        cursor:pointer;
+        position:relative;
+        transition:all 1s ease-out;
+        &:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        .cirlce{
+            width:80px;
+            height:80px;
+            background:#8A9A5B;
+            margin:0 auto;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            .small-circle{
+                width:40px;
+                height:40px;
+                border:3px solid #fff;
+                border-radius: 50%;
+            }
+        }
+        i{
+            position: absolute;
+            top:30%;
+            right:23%;
+            font-size: 3rem;
+            font-weight: 900;
+            z-index: 999;
+            color:#fff;
+        }
+        p{
+            color:#8A9A5B;
+            margin:1rem 0;
+            text-align: center;
+        }
+        button{
+            width:100%;
+            padding:0.5rem 0;
+            background:#8A9A5B;
+            color:#fff;
+            border-radius: 1rem;
+            font-weight: 600;
+            border:none;
+            font-size: 1.1rem;
+            cursor:pointer;
+        }
+    }
+}

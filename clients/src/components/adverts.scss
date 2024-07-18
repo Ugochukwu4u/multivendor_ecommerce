@@ -1,0 +1,163 @@
+$breakpointSm: 768px;
+$breakpoint_min_Md:601px;
+$breakpoint_max_Md:800px;
+.adverts{
+    width:100%;
+    height:12vh;
+    overflow:hidden;
+    background:#006400;
+    padding: 0 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0 0.5rem;
+        height:10vh;
+    }
+
+    .advert-container{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        .title{
+            padding:1rem 0;
+            color:white;
+            font-weight: 900;
+            animation: 2s  anim-popoutin ease infinite;
+
+            @keyframes anim-popoutin{
+                0%{
+                    color: #fff;
+                    transform: scale(0);
+                    opacity: 0;
+                    text-shadow: 0  0  0 rgba(0,0,0,0);
+                }
+                25%{
+                    color: #fff;
+                    transform:scale(2);
+                    opacity:1;
+                    text-shadow: 3px 10px 5px  rgba(0,0,0,0.5);
+                }
+                50%{
+                    color:#fff;
+                    transform: scale(1);
+                    opacity: 1;
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                    
+                }
+                100%{
+                    transform: scale(1);
+                    opacity:1;
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                }
+            }
+            @media(max-width: $breakpointSm){
+                font-size: 0.5rem;
+            }
+        }
+        .desc{
+            font-weight: 300;
+            color:white;
+            animation: 5s  anim-popoutin ease infinite;
+
+            @keyframes anim-popoutin{
+                0%{
+                    color: #fff;
+                    transform: scale(0);
+                    opacity: 0;
+                    text-shadow: 0  0  0 rgba(0,0,0,0);
+                }
+                25%{
+                    color: #fff;
+                    transform:scale(2);
+                    opacity:1;
+                    text-shadow: 3px 10px 5px  rgba(0,0,0,0.5);
+                }
+                50%{
+                    color:#fff;
+                    transform: scale(1);
+                    opacity: 1;
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                    
+                }
+                100%{
+                    transform: scale(1);
+                    opacity:1;                   
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                }
+            }
+            @media(max-width: $breakpointSm){
+                font-size: 0.5rem;
+            }
+        }
+        .date{
+            font-weight: 300;
+            color:white;
+            animation: 8s  anim-popoutin ease infinite;
+
+            @keyframes anim-popoutin{
+                0%{
+                    color: #fff;
+                    transform: scale(0);
+                    opacity: 0;
+                    text-shadow: 0  0  0 rgba(0,0,0,0);
+                }
+                25%{
+                    color: #fff;
+                    transform:scale(2);
+                    opacity:1;
+                    text-shadow: 3px 10px 5px  rgba(0,0,0,0.5);
+                }
+                50%{
+                    color:#fff;
+                    transform: scale(1);
+                    opacity: 1;
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                    
+                }
+                100%{
+                    transform: scale(1);
+                    opacity:1;
+                    text-shadow: 1px 0 0 rgba(0,0,0,0);
+                }
+            }
+            @media(max-width: $breakpointSm){
+                font-size: 0.5rem;
+            }
+        }
+        .advert-order{
+            background: #8A9A5B;
+            padding:1rem;
+            border-radius: .2rem;
+            display:flex;
+            gap:.2rem;
+            align-items: center;
+            color:#FFFFF0;
+            cursor: pointer;
+            span{
+                font-weight: 900;
+            }
+            @media(max-width: $breakpointSm){
+                display:none;
+            }
+        }
+        img{
+            width: 100px;
+            margin-top:-1rem;
+            object-fit: contain;
+            @media(max-width: $breakpointSm){
+                width:50px;
+                margin-top:0;
+            }
+        }
+        .advert-call{
+            padding: 1rem;
+            background:#8A9A5B;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color:#fff;
+            @media(max-width: $breakpointSm){
+                display:none;
+            }
+        }
+    }
+}

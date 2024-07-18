@@ -1,0 +1,36 @@
+.related-product{
+    width:100%;
+    position: relative;
+    img{
+        width:100%;
+        height:10rem;
+        object-fit: cover;
+    }
+    .item-discount{
+        position: absolute;
+        top:0;
+        right:0;
+        background:#E5E4E2;
+        padding:0.2rem;
+        color:crimson;
+        font-size: 0.8rem;
+        border-radius: 0.1rem;
+    }
+    .related-title{
+        font-size: 0.2rem;
+        margin:0.5rem 0;
+        text-transform: capitalize;
+    }
+    .price{
+        font-size: 1.3rem;
+        font-weight: 600;
+        span{
+            text-decoration: line-through;
+        }
+    }
+    .ini-price{
+        color:#E5E4E2;
+        text-decoration: line-through;
+    }
+
+}

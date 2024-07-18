@@ -1,0 +1,69 @@
+$breakpointSm: 600px;
+$breakpoint_min_Md:601px;
+$breakpoint_max_Md:800px;
+.form1{
+    width:30%;
+    margin: 5% auto;
+    text-align: center;
+    @media(min-width:$breakpoint_min_Md) and (max-width:$breakpoint_max_Md){
+        width:50%;
+    }
+    @media(max-width: $breakpointSm){
+        width:90%;
+        margin-top:10%;
+    }
+    .form1-header{
+        i{
+            background:#8A9A5B;
+            padding:1rem;
+            border-radius: 50%;
+            color:#fff;
+            font-size: 2rem;
+        }
+        h1{
+            font-size: 1.5rem;
+            margin:1rem 0;
+        }
+        p{
+            color:#565656;
+        }
+    }
+    form{
+        margin-top:1.5rem;
+        select{
+            width:100%;
+            padding:1rem;
+            outline:none;
+            border:1px solid #565656;
+            border-radius: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        input{
+            width:100%;
+            padding:1rem;
+            outline:none;
+            border:1px solid #565656;
+            border-radius: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        .error{
+            font-size:0.7rem;
+            text-align: left;
+            color:crimson;
+        }
+    }
+    button{
+        margin:1rem 0;
+        width:100%;
+        padding:0.7rem;
+        background:#8A9A5B;
+        color:white;
+        font-weight: 600;
+        outline:none;
+        border:none;
+        border-radius: 0.2rem;
+        cursor:pointer;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+    }
+}

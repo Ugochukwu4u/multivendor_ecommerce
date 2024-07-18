@@ -1,0 +1,61 @@
+$breakpointSm: 600px;
+.sellers-products{
+    width:100%;
+    height:100vh;
+    background:#E5E4E2;
+    padding: 1rem;
+    display:flex;
+    gap:0.5rem;
+    @media(max-width: $breakpointSm){
+        height:100%;
+        flex-direction: column;
+     }
+    .sell-center-left{
+        width:20%;
+        height:100%;
+        @media(max-width: $breakpointSm){
+            width:100%;
+         }
+    }
+    .sell-center-right{
+        width:80%;
+        padding:0 2rem;
+        @media(max-width: $breakpointSm){
+            width:100%;
+            padding: 0;
+         }
+        .sell-center-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @media(max-width: $breakpointSm){
+                flex-direction: column;
+             }
+            h1{
+                font-size: 2.5rem;
+                color:#8A9A5B;
+            }
+            .sell-date{
+                display: flex;
+                gap:0.5rem;
+                align-items: center;
+
+                i{
+                    color:inherit;
+                }
+            }
+        }
+        .recent-order-grid{
+            background:#fff;
+            border-radius: 0.5rem;
+            margin-top:1rem;
+            .order-grid-heading{
+                padding:1rem;
+                p{
+                    color:#E5E4E2;
+                }
+            }
+          
+        }
+    }
+}

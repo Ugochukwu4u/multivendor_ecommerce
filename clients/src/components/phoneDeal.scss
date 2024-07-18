@@ -1,0 +1,60 @@
+$breakpointSm: 786px;
+.phone-deals{
+    background:#E5E4E2;
+    padding: 1rem 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0.3rem 0;
+    }
+    h1{
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 300;
+        @media(max-width: $breakpointSm){
+            background:#8A9A5B;
+            color:white;
+            font-size: 1.1rem;
+            padding:0.5rem 1rem;
+        }
+    }
+    .phone-wrapper{
+        background:white;
+        padding:1.5rem;
+        display:flex;
+        justify-content: space-between;
+        gap:0.7rem;
+        border-radius: 0.3rem;
+        @media(max-width: $breakpointSm){
+            flex-wrap: wrap;
+            justify-content: center;
+            padding:0.5rem;
+        }
+        .phone-cat{
+            width:20%;
+            @media(max-width: $breakpointSm){
+                width:30%;
+            }
+            .content{
+                width:100%;
+                img{
+                    width:100%;
+                    height:10rem;
+                    object-fit: cover;
+                    border-radius: 0.3rem;
+                    margin-bottom: 0.2rem;
+                    @media(max-width: $breakpointSm){
+                        height: 4rem;
+                    }
+                }
+                p{
+                    text-transform: capitalize;
+                    @media(max-width: $breakpointSm){
+                        font-size: 0.6rem;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+       
+    }
+
+}

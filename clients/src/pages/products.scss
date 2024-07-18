@@ -1,0 +1,228 @@
+$breakpointSm: 768px;
+$breakpointVSm: 360px;
+.products{
+    background:#E5E4E2;
+    padding: 1rem 2rem;
+    @media(max-width: $breakpointSm){
+        padding:0.5rem;
+        margin-left:0;
+    }
+    .advert{
+        width:100%;
+        img{
+            width:100%;
+            height:15rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            @media(max-width: $breakpointSm){
+                height:6rem;
+            }
+        }
+    }
+    .product-wrapper{
+        display:flex;
+        margin:1rem 0;
+        gap:1rem;
+        @media(max-width: $breakpointSm){
+            flex-direction: column-reverse;
+            margin:0.5rem 0;
+        }
+        .left{
+            width:25%;
+            height: fit-content;
+            background:#fff;
+            border-radius: 0.3rem;
+            padding:1rem;
+            @media(max-width: $breakpointSm){
+                width:100%;
+            }
+            .category{
+                border-bottom: 1px solid #E5E4E2;
+                padding-bottom: 1rem;
+                h1{
+                    font-size: 1.2rem;
+                    text-transform: uppercase;
+                    font-weight: 300;
+                    margin-bottom:0.7rem;
+                }
+                p{
+                    margin:0.4rem 0;
+                }
+            }
+            .brand{
+                border-bottom: 1px solid #E5E4E2;
+                padding:1rem 0;
+                overflow-y: scroll;
+                h1{
+                    font-size: 1.2rem;
+                    text-transform: uppercase;
+                    font-weight: 300;
+                    margin-bottom:0.7rem;
+                }
+                .checkbox{
+                    display:flex;
+                    gap:0.5rem;
+                    margin:0.5rem 0;
+
+                    span{
+                        text-transform: capitalize;
+                    }
+                }
+            }
+            .price-range{
+                border-bottom: 1px solid #E5E4E2;
+                padding:1rem 0;
+                h1{
+                    font-size: 1.2rem;
+                    text-transform: uppercase;
+                    font-weight: 300;
+                    margin-bottom:0.7rem;
+                }
+                .price-wrapper{
+                    display:flex;
+                    gap:0.5rem;
+                    .left-price{
+                        width:50%;
+                        input[type="range"]::-webkit-slider-thumb{
+                            background-color:#8A9A5B;
+                        }
+                        p{
+                            span{
+                                display: block;
+                                width:100%;
+                                color:coral;
+                                margin:0.3rem 0;
+                            }
+                        }
+                    }
+                    .right-price{
+                        width:50%;
+                        p{
+                            span{
+                                display: block;
+                                width:100%;
+                                color:coral;
+                                margin:0.3rem 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .right{
+            width:75%;
+            background:#fff;
+            border-radius: 0.3rem;
+            padding:1.5rem;
+            @media(max-width: $breakpointSm){
+                width:100%;
+                padding:0.5rem;
+            }
+            .title{
+                border-bottom: 1px solid #E5E4E2;
+                padding-bottom: 1rem;
+
+                h1{
+                    font-size: 1.5rem;
+                    font-weight: 300;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid #E5E4E2;
+                    text-transform: capitalize;
+                    @media(max-width: $breakpointSm){
+                       font-size: 1.1rem;
+                    }
+                }
+                p{
+                    padding-top:0.7rem;
+                }
+            }
+            .right-product-wrapper{
+                margin:0.5rem 0;
+                display:flex;
+                gap:1rem;
+                flex-wrap: wrap;
+                align-items: center;
+                .content-edit{
+                    width:23.5%;
+                    height:17rem;
+                    cursor:pointer;
+                    transition: all .4s ease-out;
+                    border-radius: 0.3rem;
+                    position: relative;
+                    &:hover{
+                        box-shadow: 1px 1px 5px rgba(0,0,0,.5);
+                        transform: scale(1.1);
+                    }
+                    @media(max-width: $breakpointSm){
+                        width:30%;
+
+                     }
+                     @media(max-width:$breakpointVSm){
+                        width:45%;
+                     }
+                    .content{
+                        img{
+                            width:100%;
+                            height: 10rem;
+                            object-fit: cover;
+                        }
+                        .delivery{
+                            position:absolute;
+                            top:0;
+                            z-index: 1;
+                            left:0;
+                            background:#8A9A5B;
+                            color:#fff;
+                            padding:0.3rem;
+                            border-radius: 1rem;
+                            font-size: 0.7rem;
+                        }
+                        .out-of-stock{
+                            position: absolute;
+                            margin-top:-2rem;
+                            width:100%;
+                            background:rgba(86, 86, 86, 0.5);
+                            text-align: center;
+                            border-radius: 1rem;
+                            font-size: 0.9rem;
+                            color:#fff;
+                            text-transform: capitalize;
+                        }
+                        .r-title{
+                            text-transform: capitalize;
+                            margin:0.5rem 0.2rem;
+                            @media(max-width: $breakpointSm){
+                                font-size: 0.8rem;
+                             }
+                        }
+                        .r-price{
+                            font-weight: 900;
+                            margin:0 0.2rem;
+                            span{
+                                text-decoration: line-through;
+                            }
+                        }
+                        .content-price{
+                            display: flex;
+                            gap:0.7rem;
+                            margin: 0.5rem 0.2rem;
+                            @media(max-width: $breakpointSm){
+                                font-size: 0.7rem;
+                             }
+                            .init-price{
+                                display: flex;
+                                text-decoration: line-through;
+                                color:#E5E4E2;
+                            }
+                            .percent-price{
+                                color:#8A9A5B;
+                            }
+                        }
+                    }
+
+                }
+           
+            }
+        }
+    }
+}

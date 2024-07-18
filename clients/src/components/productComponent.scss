@@ -1,0 +1,51 @@
+$breakpointSm: 360px;
+.products-mobile{
+  width: 100%;
+  margin-left:26%;
+  background:white !important;
+  @media(max-width: $breakpointSm){
+    margin-left:23%;
+}
+  .product{
+    display:inline-block;
+    margin:0;
+    width: 18%;
+    background:#fff; 
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+      }
+  
+      h3 {
+        margin: 10px 0;
+        font-size: 1rem;
+        font-weight: lighter;
+        @media(max-width: $breakpointSm){
+          font-size: 0.8rem;
+      }
+      }
+      h2{
+        font-weight: 500;
+        font-size: 1.3rem;
+        margin:0.5rem 0;
+        @media(max-width: $breakpointSm){
+          font-size: 1rem;
+      }
+        span{
+          text-decoration: line-through;
+        }
+      }
+  
+      p {
+        margin: 0;
+        font-size: 0.6rem;
+        color: #666;
+      }
+
+  }
+   
+
+}

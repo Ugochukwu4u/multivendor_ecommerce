@@ -1,0 +1,110 @@
+$breakpointSm: 600px;
+.slideshow{
+    position: relative;
+    overflow: hidden;
+
+    .slide{
+        width:100%;
+        height:26.5rem;
+        display: none;
+        border-radius: 0.3rem;
+        @media(max-width: $breakpointSm){
+            height:10rem;
+        }
+
+        &.active{
+            display:block;
+        }
+       .slide-wrapper{
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .slide-content{
+            width:60%;
+            margin-left:2.5rem;
+            h1{
+                font-family: 'Josefin Sans', sans-serif;
+                font-size:4rem;
+                text-transform: uppercase;
+                letter-spacing: 0.2rem;
+                color:white;
+                margin-bottom:1rem;
+                @media(max-width: $breakpointSm){
+                    font-size:1rem;
+                    margin-bottom:0.5rem;
+                }
+            }
+            p{
+                color:#FFFFF0;
+                text-transform: capitalize;
+                margin-bottom: 1rem;
+                width:80%;
+                @media(max-width: $breakpointSm){
+                    font-size:0.5rem;
+                    margin-bottom:0.5rem;
+                }
+            }
+            .orders{
+                padding:0.7rem 1rem;
+                color:white;
+                background:#8A9A5B;
+                outline:none;
+                border:none;
+                border-radius: 0.3rem;
+                cursor:pointer;
+                text-transform: uppercase;
+                @media(max-width: $breakpointSm){
+                    padding:0.5rem;
+                    font-size: 0.5rem;
+                }
+            }
+        }
+
+        img{
+            width:40%;
+            object-fit: contain;
+        }
+       }
+    }
+    .indicators{
+        position: absolute;
+        bottom:0.8rem;
+        left:50%;
+        transform:translateX(-50%);
+        display: flex;
+
+        .indicator{
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin:0 0.3rem;
+            cursor:pointer;
+
+            &.active{
+                background-color: #333;
+            }
+        }
+    }
+    .prev,
+    .next{
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border:none;
+        color:white;
+        font-size: 1.3rem;
+        cursor: pointer;
+
+        &.prev{
+            left:10px;
+        }
+        &.next{
+            right:10px;
+        }
+    }
+}

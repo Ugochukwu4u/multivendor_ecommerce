@@ -1,0 +1,109 @@
+$breakpointSm: 768px;
+.dashboard-account{
+    background:#E5E4E2;
+    padding: 1rem 2rem;
+    display:flex;
+    gap:0.5rem;
+    @media(max-width: $breakpointSm){
+        padding:0.5rem;
+        flex-direction: column;
+       
+    }
+    .dashboard-left{
+        width:20%;
+        background:#fff;
+        border-radius: 0.3rem;
+        @media(max-width: $breakpointSm){
+            width:100%;
+           
+        }
+        .left-header{
+            background:grey;
+            color:white;
+            padding:0.5rem;
+            display:flex;
+            gap:0.3rem;
+            text-transform: uppercase;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .left-main-1{
+            border-top:1px solid rgb(186, 186, 186);
+            @media(max-width: $breakpointSm){
+                display: none;
+               
+            }
+            p{
+                margin:1.5rem;
+                text-transform: capitalize;
+            }
+        }
+        .main-left-logout{
+            border-top:1px solid rgb(186, 186, 186);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            @media(max-width: $breakpointSm){
+               border:none;
+               
+            }
+            button{
+                width:50%;
+                padding:0.7rem 0;
+                text-align: center;
+                outline:none;
+                border:none;
+                background:#8A9A5B;
+                color:#fff;
+                margin:1rem 0;
+                border-radius: 0.3rem;
+                text-transform: uppercase;
+                font-size: 1.1rem;
+                cursor: pointer;
+            }
+        }
+    }
+    .dashboard-right{
+        width:80%;
+        background:#fff;
+        padding:1rem;
+        border-radius: 0.3rem;
+        @media(max-width: $breakpointSm){
+            width:100%;
+           
+        }
+        h1{
+            font-size: 1.7rem;
+            margin-bottom: 1.7rem
+        }
+        .dashbord-right-wrapper{
+            display:flex;
+            gap:1rem;
+            @media(max-width: $breakpointSm){
+                flex-direction: column;
+               
+            }
+            .dash-right-main{
+                width:50%;
+                border:1px solid rgb(186, 186, 186);
+                border-radius: 0.3rem;
+                @media(max-width: $breakpointSm){
+                    width:100%;
+                   
+                }
+                h2{
+                   border-bottom:1px solid rgb(186, 186, 186);
+                   padding:1rem;
+                   margin-bottom: 1rem;
+                   font-size: 1.2rem;
+                }
+                .acc-details{
+                    padding: 1rem;
+                    p{
+                        margin-bottom: 0.4rem;
+                    }
+                }
+            }
+        }
+    }
+}
