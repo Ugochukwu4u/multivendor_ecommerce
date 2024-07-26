@@ -6,10 +6,14 @@ import { flashSales } from '../data';
 import {Link} from 'react-router-dom'
 // import ProductCarousel from './ProductCarousel';
 import ProductComponent from './ProductComponent';
+import axios from  'axios';
 
 const FlashSales = () => {
     const [timeLeft, setTimeLeft]  = useState(365 *24 * 60 * 60 *1000);
     const catLink  = flashSales[0].cat;
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] =  useState(null);
     
     useEffect(()=>{
        const timerId = setInterval(()=>{
@@ -22,12 +26,32 @@ const FlashSales = () => {
     }, []);
     const  timeLeftDisplay = formatTime(timeLeft);
 
+    useEffect(()=>{
+        const fetchFlashSalesProducts =  async ()=>{
+            try{
+                const response =  await axios.get('http://localhost:5000/api/products/top-five?flashSales=true',{
+                    headers:{
+                        token:  "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
+                    },
+                });
+                setProducts(response.data);
+            }catch(err){
+                setError(err);
+            }finally{
+                setLoading(false);
+            }
+        };
+        fetchFlashSalesProducts();
+    }, []);
+
+    if(loading) return <p>Loading...</p>;
+    if(error) return <p>Error: {error.message}</p>
+
   return (
     <div className='flashsales'>
         <div className='flashsale-header'>
             <h4>Flash Sales</h4>
             <div className='time-left'>
-                <p>Time left</p>
                 <h4>{timeLeftDisplay}</h4>
             </div>
             <Link to={`/products/${catLink}`} className='link'>
@@ -40,19 +64,19 @@ const FlashSales = () => {
         <div className='flashsales-wrapper'>
             
             <div className='mobile-flash'>
-            <ProductComponent products={flashSales}   showProgressBar = {true}/>
+            <ProductComponent products={products}   showProgressBar = {true}/>
             {/* <ProductCarousel products={flashSales}showProgressBar={true} /> */}
             </div>
             {
-                flashSales.map((items)=>(
-            <Link  to={`/product/${items.id}`} className='link content-edit' >
-                 <div className="content" key={items.id}>
-                    <img src={items.img} alt="" />
-                    <p className='title'>{items.title}</p>
+                products.map((items)=>(
+            <Link  to={`/product/${items.productTitle}`} className='link content-edit' >
+                 <div className="content" key={items._id}>
+                    <img src={items.img_1} alt="" />
+                    <p className='title'>{items.productTitle}</p>
                     <p className='price'><span>N</span>{items.price}</p>
                     <p className='initial-pice'><span>N</span>{items.initialPrice}</p>
-                    <p>{items.itemLeft} items left</p>
-                    <ProgressBar totalItems={items.totalItem} itemsLeft={items.itemLeft}/>
+                    <p>{items.productLeft} items left</p>
+                    <ProgressBar totalItems={items.totalProduct} itemsLeft={items.productLeft}/>
                 </div>
             </Link>
                 ))

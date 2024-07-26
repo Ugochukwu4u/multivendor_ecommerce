@@ -20,10 +20,12 @@ const ProductSchema = new mongoose.Schema(
         shippingFee:{type: Number, required: true},
         specification:{type:Array},
         boxContent:{type:Array},
+        outOfStock:{type: Boolean, default: false},
         img_1: {type: String, required: true},
         img_2: {type: String, required: true},
         img_3: {type: String, required: true},
         img_4:{type: String, required: true},
+        vendorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor', required: true }
     },{timestamps:true});
 
 module.exports = mongoose.model("Product", ProductSchema); 

@@ -1,15 +1,43 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { fourthAdvert, phoneCategory, products } from '../data';
 import './products.scss';
 import {Link} from 'react-router-dom';
+import  axios from 'axios';
 
-const Products = () => {
+const Products = ({category}) => {
   const [checkedCategories, setCheckedCategories] =useState([]);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
   const uniqueBrands = [...new Set(products.map(product => product.brand))];
+  const [productCategory, setProductCategory] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] =  useState(null);
 
+    useEffect(() => {
+      const fetchProducts = async () => {
+          try {
+              const response = await axios.get(`http://localhost:5000/api/products?category=${encodeURIComponent(category)}`, {
+                  headers: {
+                      token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
+                  }
+              });
+              console.log(response.data); // Log the response data
+              setProductCategory(response.data);
+          } catch (err) {
+              console.error(err); // Log the error
+              setError(err);
+          } finally {
+              setLoading(false);
+          }
+      };
+
+      fetchProducts();
+  }, [category]);
+
+  console.log(productCategory);
+  if(loading) return <p>Loading...</p>;
+  if(error) return <p>Error: {error.message}</p>
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -30,7 +58,7 @@ const Products = () => {
     setMaxPrice(event.target.value);
   };
 
-  const filteredData = products.filter((item) => {
+  const filteredData = productCategory.filter((item) => {
     const brandFilter = checkedCategories.length === 0 || checkedCategories.includes(item.brand);
     const minPriceFilter = minPrice === '' || parseInt(item.price) >= parseInt(minPrice);
     const maxPriceFilter = maxPrice === '' || parseInt(item.price) <= parseInt(maxPrice);

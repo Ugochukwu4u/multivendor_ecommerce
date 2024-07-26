@@ -9,7 +9,7 @@ const PhoneDeals = () => {
         <div className='phone-wrapper'>
             {
                 phoneCategory.map((item)=>(
-                    <Link  to={`/products/${item.cat}`} className='link phone-cat'>
+                    <Link  to={`/products/${item.category}`} className='link phone-cat'>
                     <div className='content'>
                         <img src={item.img} alt="" />
                         <p>{item.title}</p>

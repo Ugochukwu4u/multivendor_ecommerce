@@ -10,7 +10,7 @@ const Categories = () => {
                 category.map((item)=>(
                     <div className='content' key={item.id}>
                      <img src={item.img} alt="" />
-                     <Link to={`/products/${item.cat}`} className='link'>
+                     <Link to={`/products/${item.category}`} className='link'>
                      <p>{item.title}</p>
                      </Link>
                      
