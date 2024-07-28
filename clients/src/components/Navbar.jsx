@@ -41,7 +41,7 @@ const Navbar = () => {
             <p className='menu-section-2-title'>Our Categories</p>
             {
               categories.map((items)=>(
-                <Link to={`/products/${items.cat}`} className='link' >
+                <Link to={`/products/${items.category}`} className='link' >
                 <div className='menu-cat-item' key={items.id}>
                   <img src={items.img} alt="" />
                   <span>{items.title}</span>

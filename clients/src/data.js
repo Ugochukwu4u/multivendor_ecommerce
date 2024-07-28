@@ -154,7 +154,7 @@ export const category=[
         id:6,
         img:'https://img.freepik.com/premium-photo/household-appliances-set-blue-background-3d-rendering_476612-10946.jpg?w=740',
         title:'Refrigerators',
-        category:'Refrigerator'
+        category:'Refrigerators'
     },
     {
         id:7,

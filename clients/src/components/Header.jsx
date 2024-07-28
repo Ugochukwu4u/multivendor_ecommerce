@@ -9,7 +9,7 @@ const Header = () => {
        <div className="left">
         {
             categories.map((items)=>(
-              <Link to={`/products/${items.cat}`} className='link' >
+              <Link to={`/products/${items.category}`} className='link' >
               <div className='cat-items' key={items.id}>
                 <img src={items.img} alt="" />
                 <span>{items.title}</span>

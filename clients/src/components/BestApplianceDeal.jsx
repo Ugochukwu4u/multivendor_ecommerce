@@ -1,5 +1,5 @@
 import './bestApplianceDeal.scss';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { categories, flashSales } from '../data'
 import { ArrowRight } from '@mui/icons-material';
 import ProductComponent from './ProductComponent';
@@ -12,12 +12,11 @@ const BestApplianceDeal = () => {
     const [applianceProducts, setApplianceProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] =  useState(null);
-    const categories = ['Generators','Electronics'];
-
+   const category = ['Generators','Electronics'];
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/products/latest-products?categories=${encodeURIComponent(categories.join(','))}`, {
+                const response = await axios.get(`http://localhost:5000/api/products/latest-products?categories=${encodeURIComponent(category.join(','))}`, {
                     headers: {
                         token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
                     }
@@ -40,7 +39,7 @@ const BestApplianceDeal = () => {
          <div className='main-wrapper'>
             <div className='main-content'>
             <h1>Best Appliance Deals</h1>
-            <Link to={`/products/${categories.join(',')}`} className='link'>
+            <Link to={`/products/${category.join(',')}`} className='link'>
             <div className='link-btn'>
             <span>See All</span>
             <ArrowRight/>
