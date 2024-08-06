@@ -56,14 +56,14 @@ const BestPhoneDeals = () => {
             </div>
             {
                 phoneProducts.map((items)=>(
-            <Link  to={`/product/${items.productTitle}`} className='link content-edit' >
-                 <div className="content" key={items._id}>
-                    <img src={items.img_1} alt="" />
-                    <p className='title'>{items.productTitle}</p>
-                    <p className='price'><span>N</span>{items.price}</p>
-                    <p className='initial-pice'><span>N</span>{items.initialPrice}</p>
-                </div>
-            </Link>
+                    <Link to={`/product/${encodeURIComponent(items.productTitle)}`} className='link content-edit' >
+                    <div className="content" key={items._id}>
+                       <img src={items.img_1} alt="" />
+                       <p className='title'>{items.productTitle}</p>
+                       <p className='price'><span>N</span>{items.price}</p>
+                       <p className='initial-pice'><span>N</span>{items.initialPrice}</p>
+                   </div>
+                    </Link>
                 ))
             }
         </div>

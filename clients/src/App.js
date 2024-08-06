@@ -49,7 +49,7 @@ const router  = createBrowserRouter([
         element:<Products/>
       },
        {
-        path:"/product/:id",
+        path:"/product/:productTitle",
         element: <FacebookProvider appId='970187250958916'><Product/></FacebookProvider>
       },
       {

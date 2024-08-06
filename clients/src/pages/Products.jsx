@@ -35,8 +35,7 @@ const Products = () => {
 
     fetchProducts();
   }, [category]);
-
-  console.log(productCategory);
+  
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>
 
@@ -87,23 +86,6 @@ const Products = () => {
                 </Link>
               ))
             }
-            {/* {
-              productCategory.map((product)=>(
-                product.categories.map((category)=>(
-                  <Link to={`/products/${category}`} className='link'>
-                  <p>{category}</p>
-                </Link>
-                ))
-              ))
-            } */}
-            {/* {
-              productCategory[0].categories.map((category) => (
-                <Link to={`/products/${category}`} className='link'>
-                  <p>{category}</p>
-                </Link>
-              ))
-            } */}
-
           </div>
           <div className='brand'>
             <h1>brand</h1>
@@ -120,19 +102,6 @@ const Products = () => {
                 </div>
               ))
             }
-            {/* {
-              productCategory.map((product) => (
-                <div key={product._id} className='checkbox'>
-                  <input
-                    type="checkbox"
-                    name={product.brand}
-                    checked={uniqueBrands.includes(product.brand)}
-                    onChange={handleCheckboxChange}
-                  />
-                  <span>{product.brand}</span>
-                </div>
-              ))
-            } */}
           </div>
           <div className='price-range'>
             <h1>Price Range</h1>

@@ -31,7 +31,7 @@ router.delete("/:id",verifyTokenAndAuthorization, async(req, res)=>{
            res.status(500).json(err);
        }
 });
-//GET ONE PRODUCT
+//GET ONE PRODUCT BY ID
 router.get("/find/:id", async(req, res)=>{
     try{
      const product = await Product.findById(req.params.id);
@@ -40,7 +40,23 @@ router.get("/find/:id", async(req, res)=>{
         res.status(500).json(err);
     }
 });
-
+//GET ONE PRODUCT by title
+router.get("/title/:productTitle", async(req, res)=>{
+    const productTitle = req.params.productTitle;
+    try{
+     const product = await Product.findOne({productTitle: productTitle});
+     if(!product){
+        return res.status(404).json({message:'product not found'})
+     }
+        res.status(200).json(product);
+    }catch(err){
+        console.error(err);
+        res.status(500).json({
+            error:'Internal server error',
+            message:err.message
+        });
+    }
+});
 //GET latest PRODUCTS
 router.get("/latest-products", async (req, res) => {
     const qNew = req.query.new;
@@ -167,20 +183,48 @@ router.get("/vendor/:vendorId/total-products", async (req, res) => {
         });
     }
 });
-// GET RELATED PRODUCTS
-router.get("/related-products/:productId", async (req, res) => {
-    const productId = req.params.productId;
+// // GET RELATED PRODUCTS
+// router.get("/related-products/:productId", async (req, res) => {
+//     const productId = req.params.productId;
+
+//     try {
+//         // Find the current product by ID
+//         const currentProduct = await Product.findById(productId);
+//         if (!currentProduct) {
+//             return res.status(404).json({ message: 'Product not found' });
+//         }
+
+//         // Find related products by the same category and brand
+//         const relatedProducts = await Product.find({
+//             _id: { $ne: productId }, // Exclude the current product
+//             categories: { $in: currentProduct.categories },
+//             brand: currentProduct.brand
+//         }).limit(5); // Limit to 5 related products or adjust as needed
+
+//         res.status(200).json(relatedProducts);
+//     } catch (err) {
+//         console.error(err); // Log the error for debugging
+//         res.status(500).json({
+//             error: 'Internal server error',
+//             message: err.message
+//         });
+//     }
+// });
+
+// GET RELATED PRODUCTS BY TITLE
+router.get("/related-products/:productTitle", async (req, res) => {
+    const productTitle = req.params.productTitle;
 
     try {
-        // Find the current product by ID
-        const currentProduct = await Product.findById(productId);
+        // Find the current product by title
+        const currentProduct = await Product.findOne({ productTitle: req.params.productTitle });
         if (!currentProduct) {
             return res.status(404).json({ message: 'Product not found' });
         }
 
         // Find related products by the same category and brand
         const relatedProducts = await Product.find({
-            _id: { $ne: productId }, // Exclude the current product
+            productTitle: { $ne: currentProduct.productTitle }, // Exclude the current product
             categories: { $in: currentProduct.categories },
             brand: currentProduct.brand
         }).limit(5); // Limit to 5 related products or adjust as needed

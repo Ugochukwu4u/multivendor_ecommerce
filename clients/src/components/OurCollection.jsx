@@ -36,7 +36,7 @@ const OurCollection = () => {
         <div className='collection-wrapper'>
         {
                 latestCollection.map((items)=>(
-            <Link  to={`/product/${items.productTitle}`} className='link content-edit' >
+            <Link to={`/product/${encodeURIComponent(items.productTitle)}`}  className='link content-edit' >
                  <div className="content" key={items._id}>
                     <img src={items.img_1} alt="" />
                     <p className='title'>{items.productTitle}</p>

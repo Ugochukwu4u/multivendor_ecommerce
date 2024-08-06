@@ -4,7 +4,10 @@ import { Badge, IconButton } from '@mui/material';
 import { ShoppingCartOutlined } from '@mui/icons-material';
 import {Link} from 'react-router-dom';
 import { categories } from '../data';
+import {useSelector} from 'react-redux';
+
 const Navbar = () => {
+  const quantity = useSelector(state =>state.cart.quantity);
   const  user = true;
   const[isOpen,setIsOpen] = useState(false);
   const[isMobileOpen, setIsMobileOpen] = useState(false);
@@ -112,7 +115,7 @@ const Navbar = () => {
         <Link to='/cart' className='link'>
             <div className='cart'>
             <IconButton aria-label="cart">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={quantity} color="secondary">
             <ShoppingCartOutlined/>
             </Badge>
             </IconButton>

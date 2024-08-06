@@ -1,9 +1,21 @@
 import './register.scss';
 import{useState} from 'react';
+import { redirect } from 'react-router-dom';
+import axios from  'axios';
 
+const initialFormData = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
+  gender: '',
+  dateOfBirth: '',
+};
 const Register = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ ...initialFormData });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
@@ -29,10 +41,18 @@ const Register = () => {
     setStep(step - 1);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    alert('Form submitted successfully');
-    // Handle form submission logic here
+    try {
+      await axios.post("http://localhost:5000/api/auth/register", { ...formData });
+      redirect('/login');
+    } catch (err) {
+      console.error("Registration error:", err);
+      console.error("Server error message:", err.response?.data?.message);
+    }
+    console.log('Form is valid. Submitting...');
+    // Reset the form after successful submission
+    setFormData({ ...initialFormData });
   };
 
   const handleInputChange = (event) => {
@@ -60,7 +80,6 @@ const Register = () => {
       if(formData.password != formData.confirmPassword){
         errors.confirmPassword   = 'Password do not match';
       }
-      
     }else if (step === 2){
       if (!formData.firstName) {
         errors.firstName = 'First Name is required';
@@ -77,47 +96,54 @@ const Register = () => {
       }else if(isNaN(formData.phone)){
         errors.phone = 'Phone must be a valid number';
       }
+    }else if (step === 3){
+      if (!formData.gender) {
+        errors.gender = 'Gender is required';
+      }
+      if (!formData.dateOfBirth) {
+        errors.dateOfBirth = 'Date of Birth is required';
+      }
     }
     setErrors(errors);
-    // if (Object.keys(errors).length === 0) {
-    //   handleNext(); 
-    // }
     return Object.keys(errors).length === 0;
   };
   console.log('Password:', formData.password);
 console.log('Confirm Password:', formData.confirmPassword);
 
-  const handlePasswordChange = (event) => {
-    const password = event.target.value;
-    if (password.length > 0) {
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-      if (!passwordRegex.test(password)) {
-        setErrors({ ...errors, password: 'Password must start with an uppercase letter, followed by a lowercase letter, a number, and a special character' });
-        // setFormData({...formData,password:''});
-      } else {
-        setFormData({ ...formData, password: password });
-        const strength = checkPasswordStrength(password);
-        setPasswordStrength(strength);
-      }
-    }
-  };
-  const checkPasswordStrength = (password) => {
-    const strength = {
-      strength: '',
-      color: '',
-    };
-    if (password.length < 8) {
-      strength.strength = 'Weak';
-      strength.color = 'red';
-    } else if (password.length >= 8 && password.length < 12) {
-      strength.strength = 'Medium';
-      strength.color = 'orange';
+const handlePasswordChange = (event) => {
+  const password = event.target.value;
+  setFormData({ ...formData, password: password });
+  if (password.length > 0) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setErrors({ ...errors, password: 'Password must start with an uppercase letter, followed by a lowercase letter, a number, and a special character' });
     } else {
-      strength.strength = 'Strong';
-      strength.color = 'green';
+      setErrors({ ...errors, password: '' }); // Clear error message
+      const strength = checkPasswordStrength(password);
+      setPasswordStrength(strength);
     }
-    return strength;
+  } else {
+    setErrors({ ...errors, password: '' }); // Clear error message when password is empty
+  }
+  setFormData({ ...formData, password: password, confirmPassword: password });
+};
+const checkPasswordStrength = (password) => {
+  const strength = {
+    strength: '',
+    color: '',
   };
+  if (password.length < 8) {
+    strength.strength = 'Weak';
+    strength.color = 'red';
+  } else if (password.length >= 8 && password.length < 12) {
+    strength.strength = 'Medium';
+    strength.color = 'orange';
+  } else {
+    strength.strength = 'Strong';
+    strength.color = 'green';
+  }
+  return strength;
+};
   return (
     <div>
        {step === 1 && (

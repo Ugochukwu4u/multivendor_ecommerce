@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require("../models/User");
 const Seller = require("../models/Seller");
+const Product = require("../models/Product");
 const bcrypt = require('bcrypt');
 const { verify, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../verifyToken');
 
@@ -113,6 +114,19 @@ router.get("/seller/find/:id",verifyTokenAndAdmin, async(req, res)=>{
         res.status(500).json(err);
     }
 });
+// GET SELLER BY VENDOR ID
+router.get("/seller/vendor/:vendorId", async (req, res) => {
+    try {
+      const products = await Product.find({ vendorId: req.params.vendorId });
+      const vendorIds = products.map((product) => product.vendorId);
+      const uniqueVendorId = [...new Set(vendorIds)][0]; // Get unique vendorId
+      const seller = await Seller.findById(uniqueVendorId);
+      const { password, ...info } = seller._doc;
+      res.status(200).json(info);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 //UPDATE SELLER
 router.put("/seller/:id",verifyTokenAndAuthorization, async(req, res)=>{
     if(req.body.password){

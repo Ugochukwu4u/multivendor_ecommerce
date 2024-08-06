@@ -1,14 +1,19 @@
 import './product.scss';
-import { getState, products, singleProduct } from '../data';
+import { getState, products } from '../data';
 import { useEffect, useState } from 'react';
 import {CSSTransition} from 'react-transition-group';
 import moment from 'moment';
 import RelatedProducts from '../components/RelatedProducts';
 import ProgressBar    from '../components/ProgressBar';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useShare } from 'react-facebook';
+import axios from 'axios';
+import {addProduct} from '../redux/cartRedux';
+import {useDispatch} from 'react-redux';
 
 const Product = () => {
+  const { productTitle } = useParams();
+  console.log(productTitle.productTitle);
   const [selectedItems, setSelectedItems] = useState(null);
   const isArrayEmpty = array => array.length === 0;
   const { share } = useShare();
@@ -17,6 +22,74 @@ const Product = () => {
   const [selectedLGA, setSelectedLGA] = useState("");
   const [showLGAOptions, setShowLGAOptions] = useState(false);
   const [timeLeft, setTimeLeft]  = useState(365 *24 * 60 * 60 *1000);
+  const [singleProduct, setSingleProduct] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [seller, setSeller] =  useState([]);
+  const dispatch =  useDispatch();
+  const [quantity, setQuantity] = useState(1); 
+  const product = singleProduct;
+  const price = singleProduct?.price * quantity;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/products/title/${productTitle}`, {
+          headers: {
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
+          }
+        });
+        console.log(response.data); // Log the response data
+        setSingleProduct(response.data);
+      } catch (err) {
+        console.error(err); // Log the error
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchProducts();
+  }, [productTitle]);
+
+  useEffect(() => {
+    const fetchRelatedProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/products/related-products/${productTitle}`, {
+          headers: {
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
+          }
+        });
+        console.log(response.data); // Log the response data
+        setRelatedProducts(response.data);
+      } catch (err) {
+        console.error(err); // Log the error
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchRelatedProducts();
+  }, [productTitle]);
+  const vendorId  =  singleProduct?.vendorId;
+
+  useEffect(() => {
+    const fetchSeller = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/users/seller/vendor/${vendorId}`, {
+          headers: {
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY5OTA1YThiMDViMTk3MjRkNWRjZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyMTcxOTUwOSwiZXhwIjoxNzI0MzExNTA5fQ.DgGnu-oMS7QWQ9zL6SqNdCgqhC1PbvGAo9bOv5rEI2U"
+          }
+        });
+        console.log(response.data); // Log the response data
+        setSeller(response.data);
+      } catch (err) {
+        console.error(err); // Log the error
+      } 
+    };
+    fetchSeller();
+  }, [vendorId]);
 
   useEffect(()=>{
     const timerId = setInterval(()=>{
@@ -30,10 +103,10 @@ const Product = () => {
  const  timeLeftDisplay = formatTime(timeLeft);
 
 
-  const  firstImg = products[0].img;
-  const  secondImg  = products[0].imgSm_1;
-  const  thirdImg  =  products[0].imgSm_2;
-  const fourthImg =  products[0].imgSm_3;
+ const firstImg = singleProduct?.img_1;
+ const secondImg = singleProduct?.img_2;
+ const thirdImg = singleProduct?.img_3;
+ const fourthImg = singleProduct?.img_4;
 
   const images   =  [firstImg, secondImg, thirdImg, fourthImg];
 
@@ -49,10 +122,10 @@ const Product = () => {
     setSelectedLGA(event.target.value);
   };
   //facebook data.
-  const shareImg = singleProduct[0].img;
-  const shareTitle = singleProduct[0].title;
-  const sharePrice = singleProduct[0].price;
-  const shareLink = `/product/${singleProduct[0].id}`;
+  const shareImg = singleProduct?.img_1;
+  const shareTitle = singleProduct?.productTitle;
+  const sharePrice = singleProduct?.price;
+  const shareLink = `/product/${singleProduct?.productTitle}`;
 
   const handleShare = () => {
     const product = {
@@ -83,6 +156,17 @@ const oneHourFromNow = new Date(now.getTime() + 1 * 60 * 60 * 1000);
 const fiveDaysFromOneHour = new Date(oneHourFromNow.getTime() + 5 * 24 * 60 * 60 * 1000);
 const day = fiveDaysFromOneHour.getDate();
 const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
+
+
+if (loading) return <p>Loading...</p>;
+if (error) return <p>Error: {error.message}</p>
+
+const handleSubmit =()=>{
+  //update cart
+  dispatch(
+    addProduct({...product, quantity,selectedState, selectedLGA,selectedItems})
+  ) 
+}
   return (
     <div className='product'>
         <div className='product-wrapper'>
@@ -108,44 +192,41 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
                     </div>
                 </div>
                 <div className="product-details">
-                  {
-                    singleProduct.map((item)=>(
-                      <div className='product-detail-wrapper'>
-                    <h1>{item.title}</h1>
+                <div className='product-detail-wrapper'>
+                    <h1>{singleProduct?.productTitle}</h1>
                     {
-                      item.flashSale === true ?
+                      singleProduct?.flashSales === true ?
                       (
                         <div className='product-flash'>
                           <div className='product-flash-header'>
                             <p>Flash Sales</p>
                             <p>Time Left: {timeLeftDisplay}</p>
                           </div>
-                          <div className='product-detail-price' key={item.id}>
-                              <p className='c-price'><span>N</span>{item.price}</p>
-                              {item.initialPrice ? <p className='i-price'>N{item.initialPrice}</p>: ''}
-                              {item.initialPrice !== '' && <p className='i-percent'>{(((item.price - item.initialPrice)/item.initialPrice)  *  100).toFixed()}%</p> }
+                          <div className='product-detail-price' key={singleProduct?._id}>
+                              <p className='c-price'><span>N</span>{singleProduct?.price}</p>
+                              {singleProduct?.initialPrice ? <p className='i-price'>N{singleProduct?.initialPrice}</p>: ''}
+                              {singleProduct?.initialPrice !== '' && <p className='i-percent'>{(((singleProduct?.price - singleProduct?.initialPrice)/singleProduct?.initialPrice)  *  100).toFixed()}%</p> }
                           </div>
                           <div className='product-flash-left'>
-                            <p>{item.itemLeft} items left</p>
-                            <ProgressBar totalItems={item.totalItem} itemsLeft={item.itemLeft}/>
+                            <p>{singleProduct?.productLeft} items left</p>
+                            <ProgressBar totalItems={singleProduct?.totalProduct} itemsLeft={singleProduct?.productLeft}/>
                           </div>
                         </div>
                       ):(
-                      <div className='product-detail-price' key={item.id}>
-                      <p className='c-price'><span>N</span>{item.price}</p>
-                      {item.initialPrice ? <p className='i-price'>N{item.initialPrice}</p>: ''}
-                      {item.initialPrice !== '' && <p className='i-percent'>{(((item.price - item.initialPrice)/item.initialPrice)  *  100).toFixed()}%</p> }
+                      <div className='product-detail-price' key={singleProduct?._id}>
+                      <p className='c-price'><span>N</span>{singleProduct?.price}</p>
+                      {singleProduct?.initialPrice ? <p className='i-price'>N{singleProduct?.initialPrice}</p>: ''}
+                      {singleProduct?.initialPrice !== '' && <p className='i-percent'>{(((singleProduct?.price - singleProduct?.initialPrice)/singleProduct?.initialPrice)  *  100).toFixed()}%</p> }
                       </div>
                       )}
-                    <p className='product-detail-ship'>+Shipping from N{item.shipping_fee} from {item.shipping_Address}</p>
+                    <p className='product-detail-ship'>+Shipping from N{singleProduct?.shippingFee} from {singleProduct?.shipping_Address}</p>
                     {
-                      isArrayEmpty(item.size) ? '':(
+                      isArrayEmpty(singleProduct?.size) ? '':(
                         <div className='varation'>
                         <h1>Variation Available</h1>
                           <ul>
                             {
-                             singleProduct.map((product) => {
-                              return product.size.map((v, index) => (
+                              singleProduct?.size?.map((v, index) =>(
                                 <li
                                   key={index}
                                   onClick={() => handleItemClick(v)}
@@ -157,7 +238,7 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
                                   {v}
                                 </li>
                               ))
-                            })
+                            
                             }
                           </ul>
                         </div>
@@ -165,10 +246,8 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
                       
                     }
                   
-                    <button className='cart-btn'><i class='bx bx-cart'></i> Add to Cart</button>
+                    <button className='cart-btn' onClick={handleSubmit}><i class='bx bx-cart'></i> Add to Cart</button>
                   </div>
-                    ))
-                  }
                 </div>
             </div>
             <div className='mobile-delivery-view'>
@@ -218,17 +297,13 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
 
             </div>
            <div className='about-product'>
-            {
-              singleProduct.map((item)=>(
-                <>
+           <>
                 <h1 className='about-product-title'>Product Details</h1>
-              <h2>Welcome to {item.company_name}</h2>
-              <p>{item.product_detail}</p>
+              <h2>Welcome to {seller?.companyName}</h2>
+              <p>{singleProduct?.productDescription}</p>
               <h2>About Us</h2>
-              <p>{item.about_company}</p>
+              <p>{seller?.aboutCompany}</p>
                 </>
-              ))
-            }   
            </div>
            <div className='product-specification'>
             <h1 className='spec-title'>Specification</h1>
@@ -236,7 +311,7 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
               <div className='key-left'>
                 <h1 className='key-title'>Key Features</h1>
                 {
-                  singleProduct[0].specification.map((item,index)=>(
+                  singleProduct?.specification.map((item,index)=>(
                     <ul>
                   <li key={index}>{item}</li>
                 </ul>
@@ -247,7 +322,7 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
               <div className='key-right'>
               <h1 className='key-title'>What's in the box</h1>
               {
-                singleProduct[0].box_content.map((item,index)=>(
+                singleProduct?.boxContent.map((item,index)=>(
                   <ol>
                   <li key={index}>{item}</li>
                 </ol>
@@ -284,12 +359,12 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
             <div className='pick-up-info'>
               <div className='pick-up'>
                 <p className='pick-up-title'>Pickup Station</p>
-                <p className='pick-up-amount'>Delivery Fees N 250</p>
+                <p className='pick-up-amount'>Delivery Fees N {singleProduct?.shippingFee}</p>
                 <p className='pick-up-desc'>Arriving at pickup station between {`${day} ${month}`} & {`${day + 2} ${month}`} when you order within  next 1hr</p>
               </div>
               <div className='pick-up'>
                 <p className='pick-up-title'>Door  Delivery</p>
-                <p className='pick-up-amount'>Delivery Fees N 620</p>
+                <p className='pick-up-amount'>Delivery Fees N {singleProduct?.shippingFee}</p>
                 <p className='pick-up-desc'>Ready for delivery between {`${day} ${month}`} &  {`${day + 2} ${month}`} when you order within 1hr</p>
               </div>
             </div>
@@ -300,15 +375,15 @@ const month = fiveDaysFromOneHour.toLocaleString('default', { month: 'long' });
           
           <div className='related-item-wrapper'>
           {
-            products.map((items)=>(
-              <Link to={`/product/${items.id}`} className='link content-edit'>
+            relatedProducts.map((items)=>(
+              <Link to={`/product/${items.productTitle}`} className='link content-edit'>
                <RelatedProducts
-              key={items.id}
-              img={items.img}
+              key={items._id}
+              img={items.img_1}
               {...(items.initialPrice ? {
                 discount: (((items.price - items.initialPrice) / items.initialPrice) * 100).toFixed(2) + '%'
               } : {})}
-              title={items.title} 
+              title={items.productTitle} 
               price={items.price}
               {...(
                 items.initialPrice ?
