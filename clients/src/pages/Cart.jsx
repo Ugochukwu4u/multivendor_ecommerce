@@ -4,13 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import TopSelling from '../components/TopSelling';
 import RelatedProducts from '../components/RelatedProducts';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import axios from 'axios';
+import { incrementProduct, decrementProduct,removeProduct } from '../redux/cartRedux';
 
 const Cart = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 const cart = useSelector(state =>state.cart);
 const productTitle = cart?.products?.[0]?.productTitle;
 const size = cart?.products?.find((item) => item._id === products._id)?.selectedItems;
@@ -24,6 +26,16 @@ const handleCheckout = () => {
     navigate('/login');
   }
 };
+const handleQuantity = (type, productID) => {
+  if (type === 'dec') {
+    dispatch(decrementProduct(productID));
+  } else if (type === 'inc') {
+    dispatch(incrementProduct(productID));
+  }
+};
+const handleRemove =(productID) =>{
+  dispatch(removeProduct(productID));
+}
 useEffect(() => {
   const fetchRelatedProducts = async () => {
     try {
@@ -72,6 +84,7 @@ useEffect(() => {
             <div className='cart-left-wrapper'>
             <ul>
         {cart?.products?.map((item) => (
+          <>
           <li key={item._id}>
             <div className='cart-left-img'>
             <img src={item.img_1} alt={item.productTitle} />
@@ -93,6 +106,15 @@ useEffect(() => {
             </div>
            
           </li>
+          <div className='extra'>
+            <button onClick={()=> handleRemove(item._id)}>Remove Item</button>
+              <div className='extra-add'>
+              <i onClick={() => handleQuantity('dec', item._id)} className='bx bx-minus'></i>
+              <p>{item.quantity}</p>
+              <i onClick={() => handleQuantity('inc', item._id)} className='bx bx-plus'></i>
+              </div>
+            </div>
+          </>
         ))}
       </ul>
             </div>
