@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,13 +11,13 @@ const Login = () => {
     email: '',
     password: '',
   });
-
+  const navigate = useNavigate();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = formData;
 
@@ -31,7 +32,16 @@ const Login = () => {
     }
 
     // Form is valid, proceed with submission
-    console.log('Form submitted:', formData);
+    try {
+     const response  = await axios.post("http://localhost:5000/api/auth/login", formData );
+     console.log(response.data);
+     localStorage.setItem('user', JSON.stringify(response.data));
+      navigate('/');
+    } catch (err) {
+      console.error("Login error:", err);
+      console.error("Server error message:", err.response?.data?.message);
+    }
+   
   };
 
   return (

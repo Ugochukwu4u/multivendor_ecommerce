@@ -1,17 +1,17 @@
 import './register.scss';
 import{useState} from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from  'axios';
 
 const initialFormData = {
   email: '',
   password: '',
   confirmPassword: '',
-  firstName: '',
-  lastName: '',
+  firstname: '',
+  lastname: '',
   phone: '',
   gender: '',
-  dateOfBirth: '',
+  dateOfbirth: '',
 };
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -20,15 +20,15 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    firstName:'',
-    lastName:'',
+    firstname:'',
+    lastname:'',
     phone:'',
   });
   const [passwordStrength, setPasswordStrength] = useState({
     strength: '',
     color: '',
   });
-
+  const navigate = useNavigate();
   const handleNext = () => {
     if (validateForm()) {
       if (Object.keys(errors).length === 0) {
@@ -43,9 +43,10 @@ const Register = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(formData);
     try {
       await axios.post("http://localhost:5000/api/auth/register", { ...formData });
-      redirect('/login');
+      navigate('/login');
     } catch (err) {
       console.error("Registration error:", err);
       console.error("Server error message:", err.response?.data?.message);
@@ -81,15 +82,15 @@ const Register = () => {
         errors.confirmPassword   = 'Password do not match';
       }
     }else if (step === 2){
-      if (!formData.firstName) {
-        errors.firstName = 'First Name is required';
-      }else if (/^[0-9]/.test(formData.firstName)) {
-        errors.firstName = 'First Name cannot start with a number';
-      }else if (/^[0-9]/.test(formData.lastName)) {
+      if (!formData.firstname) {
+        errors.firstname = 'First Name is required';
+      }else if (/^[0-9]/.test(formData.firstname)) {
+        errors.firstname = 'First Name cannot start with a number';
+      }else if (/^[0-9]/.test(formData.lastname)) {
         errors.lastName = 'Last Name cannot start with a number';
       }
-      if (!formData.lastName) {
-        errors.lastName = 'Last Name is required';
+      if (!formData.lastname) {
+        errors.lastname = 'Last Name is required';
       }
       if (!formData.phone) {
         errors.phone = 'Phone Number is required';
@@ -100,8 +101,8 @@ const Register = () => {
       if (!formData.gender) {
         errors.gender = 'Gender is required';
       }
-      if (!formData.dateOfBirth) {
-        errors.dateOfBirth = 'Date of Birth is required';
+      if (!formData.dateOfbirth) {
+        errors.dateOfbirth = 'Date of Birth is required';
       }
     }
     setErrors(errors);
@@ -251,21 +252,21 @@ const Form2 = ({ formData, setFormData, handleNext, handlePrev,validateForm,erro
       <input
           type="text"
           placeholder='First Name*'
-          value={formData.firstName}
+          value={formData.firstname}
           onChange={(event) =>
-            setFormData({ ...formData, firstName: event.target.value })
+            setFormData({ ...formData, firstname: event.target.value })
           }
         />
-        {errors.firstName && <p className='error'>{errors.firstName}</p>}
+        {errors.firstname && <p className='error'>{errors.firstname}</p>}
         <input
           type="text"
           placeholder='Last Name*'
-          value={formData.lastName}
+          value={formData.lastname}
           onChange={(event) =>
-            setFormData({ ...formData, lastName: event.target.value })
+            setFormData({ ...formData, lastname: event.target.value })
           }
         />
-        {errors.lastName && <p className='error'>{errors.lastName}</p>}
+        {errors.lastname && <p className='error'>{errors.lastname}</p>}
         <input
           type="text"
           placeholder='Phone Number'
@@ -308,9 +309,9 @@ const Form3 = ({ formData, setFormData, handleFormSubmit, handlePrev }) => {
     </select>
     <input
           type="date"
-          value={formData.dateOfBirth}
+          value={formData.dateOfbirth}
           onChange={(event) =>
-            setFormData({ ...formData, dateOfBirth: event.target.value })
+            setFormData({ ...formData, dateOfbirth: event.target.value })
           }
         />
       
